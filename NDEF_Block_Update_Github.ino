@@ -18,7 +18,7 @@ Adafruit_PN532 nfc(PN532_SCK, PN532_MISO, PN532_MOSI, PN532_SS);
 uint8_t page_to_write[4] = {1, 1, 1, 1};
 
 // Location page in NDEF records to place the secret password:
-int page_location = 99;
+int page_location = 100;
 
 // Setup function:
 void setup(void) {
