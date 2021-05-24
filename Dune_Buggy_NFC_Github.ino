@@ -30,8 +30,9 @@ const int greenLED = 13;
 // Secret key (this is the password written to NDEF):
 uint8_t key[4] = {1, 1, 1, 1};
 
-// Location page of secret key (this is where the passwrod is written to NDEF):
-int pageLocation = 100;
+// Location page of secret key (this is where the password is written to NDEF):
+int pageLocation2 = 100;
+int pageLocation1 = 10;
 
 // Setup function:
 void setup(void) {
@@ -91,7 +92,7 @@ void loop(void) {
     {
       uint8_t data[32]  = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
             
-        success = nfc.mifareclassic_AuthenticateBlock (uid, uidLength, 10, 1, keyuniversal);
+        success = nfc.mifareclassic_AuthenticateBlock (uid, uidLength, pageLocation1, 1, keyuniversal);
         success = nfc.mifareclassic_ReadDataBlock(10, data);
 
         // Display the results, depending on 'success'
@@ -111,10 +112,10 @@ void loop(void) {
         }
         else
         {
-          Serial.println("Unable to read the requested page at 10!");
+          Serial.println("Unable to read the requested page at location 1!");
         }    
 
-        nfc.ntag2xx_ReadPage(pageLocation, data);
+        nfc.ntag2xx_ReadPage(pageLocation2, data);
 
         // Display the results, depending on 'success'
         if (success) 
@@ -134,7 +135,7 @@ void loop(void) {
         }
         else
         {
-          Serial.println("Unable to read the requested page at 99!");
+          Serial.println("Unable to read the requested page at location 2!");
         }    
 
 
